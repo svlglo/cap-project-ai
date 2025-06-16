@@ -2,21 +2,41 @@ const cds = require("@sap/cds");
 const { AzureOpenAiChatClient } = require('@sap-ai-sdk/langchain');
 const { StringOutputParser } = require('@langchain/core/output_parsers');
 const { ChatPromptTemplate } = require('@langchain/core/prompts');
+const fs = require('fs');
+const path = require('path')
 
 class AIAgent {
     constructor() {
+
+      //obtener prompt
+      const promptPath = path.join(__dirname, '../agentes/prompt.json');
+      const promptData = JSON.parse(fs.readFileSync(promptPath, 'utf8'));
+
+      this.promptData = promptData;
+
       //cargar settings agente
-      this.agente = "";
+      const llmName = new AzureOpenAiChatClient({ modelName: promptData.modelName, destinationName: 'SAP_AI_CORE' });
+      const promptTemplate = ChatPromptTemplate.fromMessages([
+        ['system', promptData.agenteOrdenCompra.prompt],
+        ['user', '{text}']
+      ]);
+
+      const parser = new StringOutputParser();
+      this.agente = promptTemplate.pipe(llmName).pipe(parser);
     }
 
-    async ejemploCall(campo) {
 
-      try {
-        console.log("Estamos ok");
-      } catch (error) {
-          console.error("Error ", error);
-      }
-  }
+    async generarResumen(texto){
+
+      let respuesta = await this.agente.invoke({
+        key_words: this.promptData.agenteOrdenCompra.keyWords,
+        text: texto
+       });
+       
+
+       return respuesta;
+
+    }
 
  
     async aitest() {
@@ -58,7 +78,8 @@ class AIAgent {
                 text: 'Are you aware about your context window size?'
             });
 
-            console.log(respuesta);
+            
+            console.log(respuesta.content);
 
           
         } catch (error) {

@@ -9,11 +9,13 @@ module.exports = cds.service.impl(async (srv) => {
     srv.on("uploadFile", async (req) => {
 
             const pro = new Proceso();
+            const help = new Helpers();
+
+           // const file = req.data.files[0];
+            const file = "este es un texto que se debe generar por resumen"
+            const trackingId = help.generateTrackingId();
 
 
-            const file = req.data.files[0];
-            const trackingId = Helpers.generateTrackingId();
-            // Iniciar procesamiento en background
             Promise.resolve().then(async () => {
                 await pro.procesarArchivo(file, trackingId);
             });
@@ -24,12 +26,6 @@ module.exports = cds.service.impl(async (srv) => {
                 trackingId: trackingId 
             };
 
-            let { data } = req.data;
-
-            let agente = new AIAgent();
-            let response = agente.aitest();
-
-            console.log(response);
         
     });
 

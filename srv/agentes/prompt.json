@@ -1,0 +1,8 @@
+{
+    "agenteOrdenCompra" : {
+        "prompt" : "Debes crear un resumen considerando las siguientes palabras claves: {key_words}",
+        "keyWords" : ["aaa", "bbb", "ccc"]
+    },
+    "modelName": "gpt-4.1-nano"
+
+}
