@@ -2,6 +2,18 @@ namespace meli.index.test.db;
 
 using {cuid, managed} from '@sap/cds/common';
 
+type FileData {
+    tipo_doc: TipoDoc;
+    mimeType: String;
+    content: String //podria ser base64 o binario
+}
+
+type HeaderData {
+    id_sap: String;
+    type_documento: String;
+    created_by: String;
+    created_date : Date
+}
 
 type TipoDoc  : String enum {
   OrdenCompra;
@@ -15,7 +27,6 @@ entity Documento: cuid, managed {
     resume             : String;
     settings_llm      : Association to one Settings;
     prompt : Association to one PromptSettings;
-    qty_files : Integer;
     tracking_id: UUID;
 }
 

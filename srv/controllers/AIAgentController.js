@@ -6,18 +6,20 @@ const fs = require('fs');
 const path = require('path')
 
 class AIAgent {
-    constructor() {
+    constructor(tipoAgente) {
 
-      //obtener prompt
+      //obtener prompt segun tarea
       const promptPath = path.join(__dirname, '../agentes/prompt.json');
       const promptData = JSON.parse(fs.readFileSync(promptPath, 'utf8'));
 
-      this.promptData = promptData;
+      this.promptAgente = promptData[tipoAgente]; // Acceder directamente usando el tipoAgente
+
 
       //cargar settings agente
       const llmName = new AzureOpenAiChatClient({ modelName: promptData.modelName, destinationName: 'SAP_AI_CORE' });
+      
       const promptTemplate = ChatPromptTemplate.fromMessages([
-        ['system', promptData.agenteOrdenCompra.prompt],
+        ['system', this.promptAgente.prompt],
         ['user', '{text}']
       ]);
 
@@ -29,7 +31,7 @@ class AIAgent {
     async generarResumen(texto){
 
       let respuesta = await this.agente.invoke({
-        key_words: this.promptData.agenteOrdenCompra.keyWords,
+        key_words: this.promptAgente.keyWords,
         text: texto
        });
        

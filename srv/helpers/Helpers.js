@@ -5,7 +5,7 @@ class Helpers {
       //cargar settings agente
     }
 
-    async generateTrackingId() {
+     generateTrackingId() {
         return uuidv4();
     }
 

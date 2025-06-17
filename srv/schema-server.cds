@@ -7,7 +7,7 @@ service Servicios {
 
     //esta como funcion para testear desde navegador
     //recibiremos un archivo en formato multipart/form-data
-    function uploadFile()       returns String;
+    function uploadDocumento(header: db.HeaderData, files: array of db.FileData )       returns String;
 
 
 }
