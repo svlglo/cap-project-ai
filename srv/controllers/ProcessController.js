@@ -19,7 +19,8 @@ class ProcessController {
 
             //despues de loop, instanciar controlador para ejecutar resumen final y guardar en registro en tabla hana
 
-            this.AIAgent = new AIAgent("tipoFile");
+            this.AIAgent = new AIAgent("agenteOrdenCompra");
+            let file = "Este es un ejemplo para que generes un resumen";
             let re = await this.AIAgent.generarResumen(file);
 
             console.log(re);

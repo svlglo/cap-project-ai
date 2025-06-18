@@ -24,9 +24,9 @@ type TipoDoc  : String enum {
 //documento creado en esquema
 entity Documento: cuid, managed {
     id_sap              : String;  
-    resume             : String;
-    settings_llm      : Association to one Settings;
-    prompt : Association to one PromptSettings;
+    resume             : LargeString;
+    prompt : LargeString;
+    key_words : LargeString;
     tracking_id: UUID;
 }
 
@@ -37,21 +37,9 @@ entity File: cuid, managed {
     tipo_doc : TipoDoc;
     mimeType : String;
     resume : LargeString;
+    prompt : String;
+    key_words : String;
 }
 
-//almacenar datos de configuracion del llm
-entity Settings : cuid, managed {
-  resume : Association to Documento;
-  llmName      : String;
-  textContent : LargeString;
-}    
 
-//Manejar el prompt 
-entity PromptSettings : cuid, managed{
-    prompt : LargeString;
-}
 
-//indicar palabras claves que debe tener el prompt para buscar en cada documento
-entity KeyWords : cuid, managed{
-    word : String;
-}
