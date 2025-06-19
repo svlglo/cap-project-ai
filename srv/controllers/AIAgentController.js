@@ -1,9 +1,13 @@
-const cds = require("@sap/cds");
-const { AzureOpenAiChatClient } = require('@sap-ai-sdk/langchain');
-const { StringOutputParser } = require('@langchain/core/output_parsers');
-const { ChatPromptTemplate } = require('@langchain/core/prompts');
-const fs = require('fs');
-const path = require('path')
+import cds from '@sap/cds';
+import { AzureOpenAiChatClient } from '@sap-ai-sdk/langchain';
+import { StringOutputParser } from '@langchain/core/output_parsers';
+import { ChatPromptTemplate } from '@langchain/core/prompts';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 class AIAgent {
     constructor(tipoAgente) {
@@ -94,4 +98,4 @@ class AIAgent {
 
 }
 
-module.exports = AIAgent;
+export default AIAgent;

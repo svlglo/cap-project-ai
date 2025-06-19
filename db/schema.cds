@@ -28,17 +28,18 @@ entity Documento: cuid, managed {
     prompt : LargeString;
     key_words : LargeString;
     tracking_id: UUID;
+    files : Association to many File  on files.documento = $self;
 }
 
 //almacenar los archivos asociados al documento, aqui estara en resumen por archivo
 entity File: cuid, managed {
     id_sap              : String;  
-    documento      : Association to one Documento;
+    documento      : Association to Documento;
     tipo_doc : TipoDoc;
     mimeType : String;
     resume : LargeString;
-    prompt : String;
-    key_words : String;
+    prompt : LargeString;
+    key_words : LargeString;
 }
 
 

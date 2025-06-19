@@ -1,5 +1,5 @@
-const cds = require("@sap/cds");
-const AIAgent = require("./AIAgentController")
+import cds from '@sap/cds';
+import AIAgent from './AIAgentController.js';
 
 class ProcessController {
     constructor() {
@@ -31,4 +31,4 @@ class ProcessController {
 
 }
 
-module.exports = ProcessController;
+export default ProcessController;

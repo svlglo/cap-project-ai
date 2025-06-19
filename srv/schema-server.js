@@ -1,9 +1,9 @@
-const cds = require("@sap/cds");
-const AIAgent = require("./controllers/AIAgentController")
-const Proceso = require("./controllers/ProcessController")
-const Helpers = require("./helpers/Helpers")
+import cds from '@sap/cds';
+import AIAgent from './controllers/AIAgentController.js';
+import Proceso from './controllers/ProcessController.js';
+import Helpers from './helpers/Helpers.js';
 
-module.exports = cds.service.impl(async (srv) => {
+export default cds.service.impl(async (srv) => {
 
 
     srv.on("uploadDocumento", async (req) => {
